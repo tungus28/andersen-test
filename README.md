@@ -12,18 +12,31 @@ level one - zero paddings, level two - one padding and so on.
 Try to write code as simple as possible and we want to see high performance solution
 ---------------------------------------------------------------------------
 Input data:
+
 1|0|Electronics
+
 2|0|Video
+
 3|0|Photo
+
 4|1|MP3 player
+
 5|1|TV
+
 6|4|iPod
+
 7|6|Shuffle
+
 8|3|SLR
+
 9|8|DSLR
+
 10|9|Nikon
+
 11|9|Canon
+
 12|11|20D
+
 
 ---------------------------------------------------------------------
 
