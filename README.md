@@ -41,18 +41,31 @@ Input data:
 ---------------------------------------------------------------------
 
 Output data:
+
 Electronics
+
 -MP3 player
+
 --iPod
+
 ---Shuffle
+
 -TV
+
 Video
+
 Photo
+
 -SLR
+
 --DSLR
+
 ---Nikon
+
 ---Canon
+
 ----20D
+
 
 ## How to install
 
