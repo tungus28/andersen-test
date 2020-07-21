@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Service\StructuredTreeDeserializer;
 
@@ -7,8 +8,8 @@ namespace App\Service\StructuredTreeDeserializer;
  */
 class StructuredTreeDeserializerService
 {
-    const DELIMITER = '|';
-    const PADDING = '-';
+    private const DELIMITER = '|';
+    private const PADDING = '-';
 
     /*
      * @var array
@@ -16,22 +17,22 @@ class StructuredTreeDeserializerService
     private $treePreparedForPrint;
 
     /**
-     * @param $fullFileName
+     * @param string $fullDataFileName
      * @return array
      */
-    public function deserializeTreeFromFile($fullFileName) : array
+    public function deserializeTreeFromFile(string $fullDataFileName) : array
     {
-        $ar = [];
-        foreach (file($fullFileName) as $k => $v) {
-            $ar[] = explode(self::DELIMITER, $v);
+        $fileLines = [];
+        foreach (file($fullDataFileName) as $k => $v) {
+            $fileLines[] = explode(self::DELIMITER, $v);
         }
 
-        $arNodes = [];
-        foreach ($ar as $k => $v) {
-            $arNodes[] = ['id' => (int)$v[0], 'parent_id' => (int)$v[1], 'node_name' => trim($v[2])];
+        $nodes = [];
+        foreach ($fileLines as $value) {
+            $nodes[] = ['id' => (int)$value[0], 'parent_id' => (int)$value[1], 'node_name' => trim($value[2])];
         }
 
-        return $this->prepareTreeForPrint($this->restoreTree($arNodes));
+        return $this->prepareTreeForPrint($this->restoreTree($nodes));
 
     }
 
@@ -65,10 +66,10 @@ class StructuredTreeDeserializerService
      */
     private function prepareTreeForPrint($array, $level = 0) : array
     {
-        foreach($array as $key => $value){
-            if(is_array($value)) {
+        foreach ($array as $key => $value){
+            if (is_array($value)) {
                 if (isset($value['node_name'])) {
-                    $this->treePreparedForPrint[] = str_repeat(self::PADDING,$level / 2 ) . $value['node_name'];
+                    $this->treePreparedForPrint[] = str_repeat(self::PADDING, $level / 2 ) . $value['node_name'];
                 }
 
                 $this->prepareTreeForPrint($value, $level + 1);
