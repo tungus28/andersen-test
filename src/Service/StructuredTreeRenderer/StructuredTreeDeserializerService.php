@@ -8,18 +8,23 @@ namespace App\Service\StructuredTreeRenderer;
 class StructuredTreeDeserializerService
 {
     const DELIMITER = '|';
+    const PADDING = '-';
+
     /*
      * @var string
      */
     private $fullFileName;
 
-    private $line;
+    /*
+     * @var array
+     */
+    private $treePreparedForPrint;
 
     /**
      * @param $fullFileName
      * @return array
      */
-    public function getFileContent($fullFileName): string
+    public function deserializeTreeFromFile($fullFileName) : array
     {
         $this->$fullFileName = $fullFileName;
 
@@ -33,18 +38,17 @@ class StructuredTreeDeserializerService
             $arNodes[] = ['id' => (int)$v[0], 'parent_id' => (int)$v[1], 'node_name' => trim($v[2])];
         }
 
-        $restoredTree = $this->restoreTree($arNodes);
-
-        return $this->printTree($restoredTree);
+        return $this->prepareTreeForPrint($this->restoreTree($arNodes));
 
     }
 
-    /*
-     * @param $elements
+    /**
+     * @param $nodes
+     * @param $parentId
      * @return array
      */
-    public function restoreTree(array &$nodes, $parentId = 0) {
-
+    private function restoreTree(array &$nodes, $parentId = 0) : array
+    {
         $tree = [];
         foreach ($nodes as &$node) {
             if ($node['parent_id'] == $parentId) {
@@ -56,22 +60,27 @@ class StructuredTreeDeserializerService
                 unset($node);
             }
         }
+
         return $tree;
     }
 
-    public function printTree($array, $level = 0) {
-
-            foreach($array as $key => $value){
-                if(is_array($value)) {
-                    if (isset($value['node_name'])) {
-                        $this->line .= $level / 2 . " " . $value['node_name'] . "<br>";
-                    }
-
-                    $this->printTree($value, $level + 1);
+    /**
+     * @param $array
+     * @param int $level
+     * @return array
+     */
+    private function prepareTreeForPrint($array, $level = 0) : array
+    {
+        foreach($array as $key => $value){
+            if(is_array($value)) {
+                if (isset($value['node_name'])) {
+                    $this->treePreparedForPrint[] = str_repeat(self::PADDING,$level / 2 ) . $value['node_name'];
                 }
+
+                $this->prepareTreeForPrint($value, $level + 1);
             }
+        }
 
-        return $this->line;
-
+        return $this->treePreparedForPrint;
     }
 }

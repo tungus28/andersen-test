@@ -17,7 +17,7 @@ class DefaultController extends AbstractController
     {
         return $this->json([
             'message' => 'Welcome to your new controller!',
-            'fileContent' => $treeDeserializer->getFileContent(__DIR__ . "/../DataFile/InputData.txt"),
+            'fileContent' => $treeDeserializer->deserializeTreeFromFile(__DIR__ . "/../DataFile/InputData.txt"),
         ]);
     }
 }
