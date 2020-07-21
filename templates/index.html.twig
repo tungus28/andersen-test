@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ page_title }}</title>
+</head>
+<body>
+<h1>{{ page_title }}</h1>
+
+<dl>
+    {% for branch in branches %}
+        <dd>{{ branch }}</dd>
+    {% endfor %}
+</dl>
+
+</body>
+</html>

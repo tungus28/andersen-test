@@ -11,13 +11,12 @@ class DefaultController extends AbstractController
     /**
      * @Route("/default", name="default")
      * @param StructuredTreeDeserializerService $treeDeserializer
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function index(StructuredTreeDeserializerService $treeDeserializer)
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'fileContent' => $treeDeserializer->deserializeTreeFromFile(__DIR__ . "/../DataFile/InputData.txt"),
+        return $this->render('index.html.twig', [
+            'page_title' => 'Tree representation',
+            'branches' => $treeDeserializer->deserializeTreeFromFile(__DIR__ . "/../DataFile/InputData.txt"),
         ]);
     }
 }

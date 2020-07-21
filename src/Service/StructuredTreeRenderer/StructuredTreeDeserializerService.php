@@ -26,10 +26,8 @@ class StructuredTreeDeserializerService
      */
     public function deserializeTreeFromFile($fullFileName) : array
     {
-        $this->$fullFileName = $fullFileName;
-
         $ar = [];
-        foreach (file($this->$fullFileName) as $k => $v) {
+        foreach (file($fullFileName) as $k => $v) {
             $ar[] = explode(self::DELIMITER, $v);
         }
 
