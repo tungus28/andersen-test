@@ -11,11 +11,6 @@ class StructuredTreeDeserializerService
     const PADDING = '-';
 
     /*
-     * @var string
-     */
-    private $fullFileName;
-
-    /*
      * @var array
      */
     private $treePreparedForPrint;
@@ -60,6 +55,7 @@ class StructuredTreeDeserializerService
         }
 
         return $tree;
+
     }
 
     /**
