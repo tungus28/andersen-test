@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\StructuredTreeRenderer;
+namespace App\Service\StructuredTreeDeserializer;
 
 /**
  * Structured Tree Deserializer Service

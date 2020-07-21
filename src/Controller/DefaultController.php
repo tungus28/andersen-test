@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Service\StructuredTreeRenderer\StructuredTreeDeserializerService;
+use App\Service\StructuredTreeDeserializer\StructuredTreeDeserializerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
